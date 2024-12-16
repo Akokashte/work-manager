@@ -35,7 +35,6 @@ export async function POST(request, { params }) {
     try {
         const accessTokenFromCookie = await request.cookies.get("accessToken").value;
         const accessTokenData = await jwt.verify(accessTokenFromCookie, process.env.ACCESS_TOKEN_SECRET);
-        console.log("kadka", accessTokenData._id)
 
         if (!accessTokenData) {
             throw new Error("Invalid token");

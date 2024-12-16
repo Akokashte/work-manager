@@ -57,7 +57,7 @@ const AddTask = () => {
         } catch (error) {
             console.log(error);
             Swal.fire({
-                position: "top-center",
+                position: "center",
                 icon: "error",
                 title: "error while adding task !!",
                 showConfirmButton: false,
@@ -108,8 +108,8 @@ const AddTask = () => {
 
                         {/* button actions */}
                         <div className="flex justify-center gap-4">
-                            <input type="submit" className="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-700 " value={"Submit"} />
-                            <button className="text-white bg-red-500 px-4 py-2 rounded-lg hover:bg-red-700 "
+                            <input type="submit" className="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-700 cursor-pointer" value={"Submit"} />
+                            <button className="text-white bg-red-500 px-4 py-2 rounded-lg hover:bg-red-700 cursor-pointer"
                                 onClick={() => setTask({
                                     title: "",
                                     content: "",

@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { deleteTaskOfUser, getTaskOfUser } from "@/services/taskService";
 import UserContext from "@/context/userContext";
+import Task from "./Task";
 
 const ShowTask = () => {
     const context = useContext(UserContext);

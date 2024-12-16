@@ -16,7 +16,7 @@ const CustomNavbar = () => {
         try {
             await logout();
             context.setUser(undefined);
-            Swal.fire({
+            await Swal.fire({
                 position: "center",
                 icon: "success",
                 title: "Logged out successfully !",
