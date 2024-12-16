@@ -100,7 +100,7 @@ const AddTask = () => {
                         <div className="flex flex-col gap-2">
                             <label htmlFor="task_status" className="text-white block">Task Status</label>
                             <select id="task_status" className="rounded-lg px-3 py-2" name="status" value={task.status} onChange={handleInputChange} required>
-                                <option selected disabled value={"none"}>---Select Status---</option>
+                                <option  disabled defaultValue={"none"}>---Select Status---</option>
                                 <option value={"pending"}>Pending</option>
                                 <option value={"completed"}>Completed</option>
                             </select>

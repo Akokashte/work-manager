@@ -36,9 +36,9 @@ const Task = ({ task, author, deleteTask }) => {
                         {task.title}
                     </h1>
                     <div className="flex gap-5">
-                        <span className="bg-gray-900 rounded-full px-3 py-1 flex justify-center align-middle">
-                            <i className="fi fi-br-cross text-red-600 mt-1 cursor-pointer" onClick={() => handleDeleteTask(task._id)}></i>
-                        </span>
+                        <div className="bg-gray-900 rounded-full px-4 py-1 flex justify-center align-middle hover:bg-red-500 cursor-pointer transition-all text-white" onClick={()=>handleDeleteTask(task._id)}>
+                            Delete
+                        </div>
                     </div>
                 </div>
 
