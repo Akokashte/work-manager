@@ -1,9 +1,10 @@
 import UserContext from "@/context/userContext";
+import { Toast } from "@/helper/toastAlerts/toast";
+import { motion } from "framer-motion";
 import React, { useContext } from "react";
 import Swal from 'sweetalert2'
 
 const Task = ({ task, author, deleteTask }) => {
-
     console.log(task)
     const context = useContext(UserContext);
 
@@ -20,7 +21,10 @@ const Task = ({ task, author, deleteTask }) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 if (deleteTask(taskId)) {
-                    Swal.fire("task deleted successfully !", "", "success");
+                    Toast.fire({
+                        icon: "success",
+                        title: "Task deleted successfully"
+                    });
                 }
             } else if (result.isDenied) {
                 Swal.fire("you denied for deletion", "", "info");
@@ -30,8 +34,21 @@ const Task = ({ task, author, deleteTask }) => {
 
     return (
         <>
-            <div className={`flex flex-col ${task.status === "pending" ? "bg-gray-800" :
-                task.status === "completed" ? "bg-green-700" : null} px-5 py-3 rounded-lg`}>
+            <motion.div
+                initial={{
+                    opacity: 1,
+                    scale: 1,
+                }}
+                exit={{
+                    opacity: 0,
+                    scale: 0,
+                    transition: {
+                        ease: "easeOut",
+                        duration: 0.3
+                    }
+                }}
+                className={`flex flex-col ${task.status === "pending" ? "bg-gray-800" :
+                    task.status === "completed" ? "bg-green-700" : null} px-5 py-3 rounded-lg`}>
                 <div className="flex justify-between">
                     <h1 className="font-semibold capitalize text-xl text-white">
                         {task.title}
@@ -50,7 +67,7 @@ const Task = ({ task, author, deleteTask }) => {
                     <span className="font-semibold text-white">Status : {task.status}</span>
                     <span className="capitalize text-white text-right">Author: <span className="font-semibold text-white">{author}</span></span>
                 </div>
-            </div>
+            </motion.div>
         </>
     )
 }

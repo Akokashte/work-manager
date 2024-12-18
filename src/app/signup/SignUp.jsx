@@ -7,6 +7,7 @@ import { createUser, currentUser } from "@/services/userService";
 import { useRouter } from "next/navigation";
 import UserContext from "@/context/userContext";
 import Swal from "sweetalert2";
+import { Toast } from "@/helper/toastAlerts/toast";
 
 const SignUp = () => {
     const router = useRouter();
@@ -56,12 +57,9 @@ const SignUp = () => {
 
             context.setLoading(false)
 
-            Swal.fire({
-                position: "center",
+            Toast.fire({
                 icon: "success",
-                title: "User created and logged in successfully !",
-                showConfirmButton: false,
-                timer: 1500
+                title: "user registered and logged in successfully"
             });
 
             setUserData({
@@ -77,12 +75,9 @@ const SignUp = () => {
         } catch (error) {
             context.setLoading(false)
 
-            Swal.fire({
-                position: "center",
+            Toast.fire({
                 icon: "error",
-                title: "Error while creating user !!",
-                showConfirmButton: false,
-                timer: 1500
+                title: "failed to signup !!"
             });
         }
     }

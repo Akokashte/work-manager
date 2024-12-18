@@ -6,7 +6,7 @@ import Image from "next/image";
 import { currentUser, login } from "@/services/userService";
 import { useRouter } from "next/navigation";
 import UserContext from "@/context/userContext";
-import Swal from 'sweetalert2';
+import { Toast } from "@/helper/toastAlerts/toast";
 
 const Login = () => {
     const router = useRouter();
@@ -33,7 +33,10 @@ const Login = () => {
 
             if (!response.success) {
                 context.setLoading(false)
-                toast.error("Error while logging in !!", { position: "top-center" });
+                Toast.fire({
+                    icon: "error",
+                    title: "failed to login try again !!"
+                });
                 return;
             }
 
@@ -42,23 +45,19 @@ const Login = () => {
             context.setUser(loggedInUser?.user);
 
             context.setLoading(false)
-            Swal.fire({
-                position: "center",
+
+            Toast.fire({
                 icon: "success",
-                title: "Logged in successfully !",
-                showConfirmButton: false,
-                timer: 1500
+                title: "Logged in successfully"
             });
 
             router.push("/");
         } catch (error) {
             context.setLoading(false)
-            Swal.fire({
-                position: "center",
+
+            Toast.fire({
                 icon: "error",
-                title: "failed to login !!",
-                showConfirmButton: false,
-                timer: 1500
+                title: "failed to login !!"
             });
         }
     }

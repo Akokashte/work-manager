@@ -4,6 +4,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { deleteTaskOfUser, getTaskOfUser } from "@/services/taskService";
 import UserContext from "@/context/userContext";
 import Task from "./Task";
+import { AnimatePresence } from "framer-motion";
+import { Toast } from "@/helper/toastAlerts/toast";
 
 const ShowTask = () => {
     const context = useContext(UserContext);
@@ -33,12 +35,9 @@ const ShowTask = () => {
                 return true;
             }
         } catch (error) {
-            Swal.fire({
-                position: "top-end",
+            Toast.fire({
                 icon: "error",
                 title: "failed to delete task try again !!",
-                showConfirmButton: false,
-                timer: 1500
             });
         }
     }
@@ -48,11 +47,13 @@ const ShowTask = () => {
             <div className="grid grid-cols-12 min-h-screen">
                 <div className="col-span-6 col-start-4 py-3 flex flex-col gap-6  max-[729px]:col-span-10 max-[729px]:col-start-2">
                     <h1 className="text-white text-center text-2xl py-4">Your tasks ({tasks.length})</h1>
-                    {
-                        tasks.map((task, index) => {
-                            return <Task task={task} author={context?.user?.name} deleteTask={deleteTask} key={index} />
-                        })
-                    }
+                    <AnimatePresence>
+                        {
+                            tasks.map((task, index) => {
+                                return <Task task={task} author={context?.user?.name} deleteTask={deleteTask} key={index} />
+                            })
+                        }
+                    </AnimatePresence>
                 </div>
 
             </div>

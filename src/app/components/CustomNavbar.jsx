@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import Loader from "./Loader";
+import { Toast } from "@/helper/toastAlerts/toast";
 
 
 const CustomNavbar = () => {
@@ -18,21 +19,15 @@ const CustomNavbar = () => {
         try {
             await logout();
             context.setUser(undefined);
-            await Swal.fire({
-                position: "center",
+            await Toast.fire({
                 icon: "success",
                 title: "Logged out successfully !",
-                showConfirmButton: false,
-                timer: 1500,
             });
             router.push("/login");
         } catch (error) {
-            Swal.fire({
-                position: "center",
+            Toast.fire({
                 icon: "error",
                 title: "failed to logout !!",
-                showConfirmButton: false,
-                timer: 1500
             });
         }
     }

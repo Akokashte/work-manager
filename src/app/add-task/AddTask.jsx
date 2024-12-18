@@ -4,8 +4,8 @@ import React, { useContext, useState } from "react";
 import loginSvg from "../../assets/login.svg";
 import Image from "next/image";
 import { addTask } from "@/services/taskService";
-import Swal from "sweetalert2";
 import UserContext from "@/context/userContext";
+import { Toast } from "@/helper/toastAlerts/toast";
 
 const AddTask = () => {
     const context = useContext(UserContext);
@@ -36,14 +36,12 @@ const AddTask = () => {
             const result = await addTask(task);
             console.log(result)
             if (!result) {
-                Swal.fire({
-                    position: "center",
+                Toast.fire({
                     icon: "error",
-                    title: "something went wrong while adding task",
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: "something went wrong while adding task !!"
                 });
             }
+
             setTask({
                 title: "",
                 content: "",
@@ -52,14 +50,9 @@ const AddTask = () => {
 
             context.setLoading(false);
 
-
-            Swal.fire({
-                position: "center",
+            Toast.fire({
                 icon: "success",
-                scrollable:true,
-                title: "task added successfully !",
-                showConfirmButton: false,
-                timer: 1500
+                title: "task added successfully !"
             });
 
 
