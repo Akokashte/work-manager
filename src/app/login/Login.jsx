@@ -65,7 +65,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="grid grid-cols-12 my-11 h-screen max-[729px]:h-fit max-[729px]:py-4">
+            <div className="grid grid-cols-12 my-11 h-screen max-[729px]:h-fit max-[729px]:py-4 max-[729px]:text-black">
                 <div className="col-span-4 col-start-5  max-[729px]:col-span-10 max-[729px]:col-start-2">
                     <div className="w-56 mx-auto my-2">
                         <Image src={newLoginSvg} style={{ objectFit: "cover" }} alt="add task image" />

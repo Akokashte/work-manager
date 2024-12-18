@@ -78,7 +78,7 @@ const AddTask = () => {
 
     return (
         <>
-            <div className="grid grid-cols-12 justify-center h-screen max-[729px]:h-fit max-[729px]:py-4">
+            <div className="grid grid-cols-12 justify-center h-screen max-[729px]:h-fit max-[729px]:py-4 max-[729px]:text-black">
                 <div className="col-span-4 col-start-5 flex flex-col gap-4  p-3 max-[729px]:col-span-10 max-[729px]:col-start-2">
                     {/* add task image */}
                     <div className="w-56 mx-auto max-[729px]:w-full">
