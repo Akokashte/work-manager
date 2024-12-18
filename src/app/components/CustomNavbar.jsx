@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
+import Loader from "./Loader";
+
 
 const CustomNavbar = () => {
     const context = useContext(UserContext);
@@ -21,7 +23,7 @@ const CustomNavbar = () => {
                 icon: "success",
                 title: "Logged out successfully !",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             });
             router.push("/login");
         } catch (error) {
@@ -37,12 +39,12 @@ const CustomNavbar = () => {
 
     return (
         <>
-            <nav className="bg-blue-600 h-12 py-2 px-4 flex justify-between items-center">
+            <nav className="w-full min-w-full bg-blue-600 h-16 py-2 px-4 flex justify-between items-center max-[729px]:h-auto max-[729px]:flex-col max-[729px]:gap-4">
                 <div className="brand text-xl font-semibold text-white">
                     <a href="#">Work Manager</a>
                 </div>
                 {
-                    context.user && <div>
+                    context.user && <div className="">
                         <ul className="flex gap-5 text-white">
                             <li>
                                 <Link href="/" className="hover:text-blue-200" >Home</Link>
@@ -82,6 +84,9 @@ const CustomNavbar = () => {
                     </ul>
                 </div>
             </nav>
+            {
+                context.loading && <Loader />
+            }
         </>
     )
 }

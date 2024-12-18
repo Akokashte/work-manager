@@ -6,6 +6,7 @@ import UserContext from "./userContext";
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(undefined);
+    const [loading,setLoading] = useState(false);
 
     useEffect(() => {
             setUserData();
@@ -22,7 +23,7 @@ const UserProvider = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, loading, setLoading }}>
             {children}
         </UserContext.Provider>
     )

@@ -29,7 +29,7 @@ const ShowTask = () => {
             const isDeleted = await deleteTaskOfUser(taskId)
 
             if (isDeleted) {
-                loadTasks(context?.user?._id);
+                loadTasks(context?.user?._id)
                 return true;
             }
         } catch (error) {
@@ -46,7 +46,7 @@ const ShowTask = () => {
     return (
         <>
             <div className="grid grid-cols-12 min-h-screen">
-                <div className="col-span-6 col-start-4 py-3 flex flex-col gap-6">
+                <div className="col-span-6 col-start-4 py-3 flex flex-col gap-6  max-[729px]:col-span-10 max-[729px]:col-start-2">
                     <h1 className="text-white text-center text-2xl py-4">Your tasks ({tasks.length})</h1>
                     {
                         tasks.map((task, index) => {

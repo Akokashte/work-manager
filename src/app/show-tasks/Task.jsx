@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import Swal from 'sweetalert2'
 
 const Task = ({ task, author, deleteTask }) => {
+
     console.log(task)
     const context = useContext(UserContext);
 
@@ -14,7 +15,7 @@ const Task = ({ task, author, deleteTask }) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
@@ -36,7 +37,7 @@ const Task = ({ task, author, deleteTask }) => {
                         {task.title}
                     </h1>
                     <div className="flex gap-5">
-                        <div className="bg-gray-900 rounded-full px-4 py-1 flex justify-center align-middle hover:bg-red-500 cursor-pointer transition-all text-white" onClick={()=>handleDeleteTask(task._id)}>
+                        <div className="bg-gray-900 rounded-full px-4 py-1 flex justify-center align-middle hover:bg-red-500 cursor-pointer transition-all text-white" onClick={() => handleDeleteTask(task._id)}>
                             Delete
                         </div>
                     </div>

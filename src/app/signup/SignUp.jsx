@@ -31,8 +31,11 @@ const SignUp = () => {
         try {
             e.preventDefault();
             const userCreated = await createUser(userData);
+            context.setLoading(true)
 
             if (!userCreated) {
+                context.setLoading(false)
+
                 Swal.fire({
                     position: "center",
                     icon: "error",
@@ -50,6 +53,8 @@ const SignUp = () => {
                 })
                 return
             }
+
+            context.setLoading(false)
 
             Swal.fire({
                 position: "center",
@@ -70,6 +75,8 @@ const SignUp = () => {
             context.setUser(loggedInUser?.user);
             router.push("/");
         } catch (error) {
+            context.setLoading(false)
+
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -83,7 +90,7 @@ const SignUp = () => {
     return (
         <>
             <div className="grid grid-cols-12 py-6 min-h-screen">
-                <div className="col-span-4 col-start-5 flex flex-col gap-6">
+                <div className="col-span-4 col-start-5 flex flex-col gap-6 max-[729px]:col-span-10 max-[729px]:col-start-2">
                     <div className="w-56 mx-auto">
                         <Image src={signUpSvg} style={{ objectFit: "cover" }} alt="add task image" />
                     </div>

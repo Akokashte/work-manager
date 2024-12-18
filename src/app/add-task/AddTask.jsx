@@ -1,12 +1,15 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import loginSvg from "../../assets/login.svg";
 import Image from "next/image";
 import { addTask } from "@/services/taskService";
 import Swal from "sweetalert2";
+import UserContext from "@/context/userContext";
 
 const AddTask = () => {
+    const context = useContext(UserContext);
+
     const [task, setTask] = useState({
         title: "",
         content: "",
@@ -24,6 +27,7 @@ const AddTask = () => {
 
     const handleAddTaskSubmit = async (e) => {
         e.preventDefault();
+        context.setLoading(true);
         try {
             if (task.status === "none") {
                 toast.error("please select valid status !!")
@@ -46,16 +50,22 @@ const AddTask = () => {
                 status: "none",
             })
 
+            context.setLoading(false);
+
+
             Swal.fire({
                 position: "center",
                 icon: "success",
+                scrollable:true,
                 title: "task added successfully !",
                 showConfirmButton: false,
                 timer: 1500
             });
 
+
         } catch (error) {
             console.log(error);
+            context.setLoading(false);
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -68,10 +78,10 @@ const AddTask = () => {
 
     return (
         <>
-            <div className="grid grid-cols-12 justify-center h-screen">
-                <div className="col-span-4 col-start-5 flex flex-col gap-4  p-3">
+            <div className="grid grid-cols-12 justify-center h-screen max-[729px]:h-fit max-[729px]:py-4">
+                <div className="col-span-4 col-start-5 flex flex-col gap-4  p-3 max-[729px]:col-span-10 max-[729px]:col-start-2">
                     {/* add task image */}
-                    <div className="w-56 mx-auto">
+                    <div className="w-56 mx-auto max-[729px]:w-full">
                         <Image src={loginSvg} style={{ objectFit: "cover" }} alt="add task image" />
                     </div>
 
@@ -100,7 +110,7 @@ const AddTask = () => {
                         <div className="flex flex-col gap-2">
                             <label htmlFor="task_status" className="text-white block">Task Status</label>
                             <select id="task_status" className="rounded-lg px-3 py-2" name="status" value={task.status} onChange={handleInputChange} required>
-                                <option  disabled defaultValue={"none"}>---Select Status---</option>
+                                <option value={"none"} disabled>---Select Status---</option>
                                 <option value={"pending"}>Pending</option>
                                 <option value={"completed"}>Completed</option>
                             </select>

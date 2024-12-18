@@ -27,10 +27,12 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        context.setLoading(true)
         try {
             const response = await login(loginUserData);
 
             if (!response.success) {
+                context.setLoading(false)
                 toast.error("Error while logging in !!", { position: "top-center" });
                 return;
             }
@@ -39,6 +41,7 @@ const Login = () => {
 
             context.setUser(loggedInUser?.user);
 
+            context.setLoading(false)
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -49,6 +52,7 @@ const Login = () => {
 
             router.push("/");
         } catch (error) {
+            context.setLoading(false)
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -61,8 +65,8 @@ const Login = () => {
 
     return (
         <>
-            <div className="grid grid-cols-12 my-11 h-screen">
-                <div className="col-span-4 col-start-5">
+            <div className="grid grid-cols-12 my-11 h-screen max-[729px]:h-fit max-[729px]:py-4">
+                <div className="col-span-4 col-start-5  max-[729px]:col-span-10 max-[729px]:col-start-2">
                     <div className="w-56 mx-auto my-2">
                         <Image src={newLoginSvg} style={{ objectFit: "cover" }} alt="add task image" />
                     </div>
